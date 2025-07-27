@@ -1,16 +1,3 @@
-
-function toggleTheme() {
-  const isDark = document.body.classList.toggle("dark");
-  document.getElementById("themeText").innerText = isDark ? "Dark Mode" : "Light Mode";
-}
-
-
-function showTab(tab) {
-  document.getElementById("encode-tab").style.display = tab === "encode" ? "block" : "none";
-  document.getElementById("decode-tab").style.display = tab === "decode" ? "block" : "none";
-}
-
-
 function handleEncode() {
   const image = document.getElementById("encodeImage").files[0];
   const message = document.getElementById("secretMessage").value;
@@ -25,7 +12,7 @@ function handleEncode() {
   formData.append("image", image);
   formData.append("message", `${password}::${message}`);
 
-  fetch("http://localhost:5000/api/encode", {
+  fetch("https://lokesh-backend.onrender.com/api/encode", {
     method: "POST",
     body: formData
   })
@@ -45,7 +32,6 @@ function handleEncode() {
     });
 }
 
-
 function handleDecode() {
   const image = document.getElementById("decodeImage").files[0];
   const password = document.getElementById("decodePassword").value;
@@ -58,7 +44,7 @@ function handleDecode() {
   const formData = new FormData();
   formData.append("image", image);
 
-  fetch("http://localhost:5000/api/decode", {
+  fetch("https://lokesh-backend.onrender.com/api/decode", {
     method: "POST",
     body: formData
   })
@@ -80,16 +66,4 @@ function handleDecode() {
       console.error("Error decoding:", err);
       alert("Something went wrong.");
     });
-}
-
-
-function speakMessage() {
-  const msg = document.getElementById("decodedMessage").innerText;
-  if (!msg || msg === "Incorrect password!" || msg === "Invalid or unprotected message.") {
-    alert("No valid message to speak.");
-    return;
-  }
-
-  const utterance = new SpeechSynthesisUtterance(msg);
-  speechSynthesis.speak(utterance);
 }
