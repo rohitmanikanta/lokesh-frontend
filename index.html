@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StegoVault – Secure Message Vault</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="theme-toggle">
+      <label class="switch">
+        <input type="checkbox" id="themeSwitch" onchange="toggleTheme()" />
+        <span class="slider round"></span>
+      </label>
+      <span id="themeText">Light Mode</span>
+    </div>
+
+    <h1>🕵️‍♂️ StegoVault</h1>
+    <p class="tagline">Hide & Reveal Secret Messages in Images – Securely</p>
+
+    <div class="tab-buttons">
+      <button onclick="showTab('encode')">🔒 Hide Message</button>
+      <button onclick="showTab('decode')">🔓 Reveal Message</button>
+    </div>
+
+    <div class="tab-content" id="encode-tab">
+      <h2>🔒 Hide a Secret Message</h2>
+      <input type="file" id="encodeImage" accept="image/png" />
+      <textarea id="secretMessage" placeholder="Enter secret message..."></textarea>
+      <input type="password" id="encodePassword" placeholder="Enter password to protect message" />
+      <button onclick="handleEncode()">Encode and Download</button>
+      <p class="note">⚠️ Use PNG images only.</p>
+    </div>
+
+
+    <div class="tab-content" id="decode-tab" style="display:none;">
+      <h2>🔓 Reveal Hidden Message</h2>
+      <input type="file" id="decodeImage" accept="image/png" />
+      <input type="password" id="decodePassword" placeholder="Enter password to reveal message" />
+      <button onclick="handleDecode()">Decode Message</button>
+      <button onclick="speakMessage()">Speak Message</button>
+      <div id="decodedMessage" class="decoded-box"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
